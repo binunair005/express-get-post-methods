@@ -1,0 +1,26 @@
+{
+  "name": "express-get-post-methods",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "clear; nodemon app.js",
+    "ironhack": "ls #this is useless, but you can run it with $ npm run ironhack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ironhack-berlin-2018-october-ft/express-get-post-methods.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ironhack-berlin-2018-october-ft/express-get-post-methods/issues"
+  },
+  "homepage": "https://github.com/ironhack-berlin-2018-october-ft/express-get-post-methods#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "hbs": "^4.0.1",
+    "path": "^0.12.7"
+  }
+}
