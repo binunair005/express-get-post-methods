@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const bodyParser = require('body-parser');
 
 // Import the file "./students.json"
 // The "./" is important
@@ -10,6 +11,9 @@ const app = express()
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
+
+// This line set "req.body" for POST routes
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   console.log(req)
@@ -65,6 +69,28 @@ app.get('/search-result', (req,res)=> {
   res.render('search-result', {
     students: filteredStudents
   })
+})
+
+// The route to display the POST form
+app.get('/who-is-the-best-student', (req,res) => {
+  console.log(req.query.username)
+  res.render('random')
+})
+
+// The route to handle the POST form submission
+app.post('/who-is-the-best-student', (req,res) => {
+  console.log('DEBUG req.body', req.body);
+  
+  // If the input value are correct
+  if (req.body.username === 'maxence' && req.body.password === 'chartreuse') {
+    let randomIndex = Math.floor(students.length * Math.random())
+    res.render('result', {
+      name: students[randomIndex].name
+    })
+  }
+  else {
+    res.render('error')
+  }
 })
 
 

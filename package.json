@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ironhack-berlin-2018-october-ft/express-get-post-methods#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "hbs": "^4.0.1",
     "path": "^0.12.7"
