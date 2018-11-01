@@ -1,0 +1,17 @@
+<h1>Search</h1>
+
+{{!-- The action and the method are important --}}
+<form action="/search-result" method="get">
+
+  {{!-- If the user type "Max", it will add in the url: "q=Max" --}}
+  <input type="text" name="q">
+
+  {{!-- If the user select "US", it will add "country=United-States" --}}
+  <select name="country">
+    <option value="">All countries</option>
+    <option value="Germany">Germany</option>
+    <option value="United-States">US</option>
+  </select>
+
+  <button type="submit">Search</button>
+</form>

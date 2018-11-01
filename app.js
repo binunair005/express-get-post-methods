@@ -13,26 +13,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
   console.log(req)
-  res.render('index')
+  res.render('index') // Render "index.hbs"
 })
 
 app.get('/students', (req, res) => {
+   // Render "students.hbs"  
   res.render('students', {
-    students
+    students // give to the view a variable "student" that is the global variable "student"
   })
 })
 
-// This route match any URL like 
+// This route match any URL like:
 //  - /students/7
 //  - /students/abcdef
 app.get('/students/:index', (req, res) => {
   console.log('DEBUG req.url', req.url);
   console.log('DEBUG req.params', req.params);
 
-  let i = Number(req.params.index)
   // i is equal to the value in the end of the URL
+  let i = Number(req.params.index)
 
-  // If there is an 
+  // If there is a problem with "i"
   if (Number.isNaN(i) || !students[i]) {
     res.render('error') // render 'error.hbs'
   }
@@ -43,16 +44,28 @@ app.get('/students/:index', (req, res) => {
   }
 })
 
-
-// http://localhost:3000/a/b/c/d
-
-app.get('/:a/b/:c/:d', (req, res) => {
-  console.log(req.params.a) // => a
-  console.log(req.params.b) // => undefined
-  console.log(req.params.c) // => c
-  console.log(req.params.d) // => d
+// Route to display the search form
+app.get('/search', (req,res)=> {
+  res.render('search')
 })
 
+// Route to display the result of the search
+app.get('/search-result', (req,res)=> {
+  // if the URL is "/search-result?q=abc&country=Germany"
+  // => req.query = { q: 'abc', country: 'Germany' }
+  console.log(req.query)
+
+  let filteredStudents = students.filter(s => s.name.toUpperCase().includes(req.query.q.toUpperCase()))
+
+  // If the user has selected a country
+  if (req.query.country != "") {
+    filteredStudents = filteredStudents.filter(s => s.country === req.query.country)
+  }
+
+  res.render('search-result', {
+    students: filteredStudents
+  })
+})
 
 
 app.listen(3000, () => {
